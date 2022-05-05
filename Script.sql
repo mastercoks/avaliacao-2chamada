@@ -1,0 +1,114 @@
+-- MySQL dump 10.19  Distrib 10.3.34-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: avaliacao-ativ02-2chamada
+-- ------------------------------------------------------
+-- Server version	10.3.34-MariaDB-0ubuntu0.20.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `avaliacao-ativ02-2chamada`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `avaliacao-ativ02-2chamada` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `avaliacao-ativ02-2chamada`;
+
+--
+-- Table structure for table `aplicacao`
+--
+
+DROP TABLE IF EXISTS `aplicacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aplicacao` (
+  `idPessoa` int(11) NOT NULL,
+  `idVacina` int(11) NOT NULL,
+  `numDose` smallint(6) NOT NULL,
+  `dataHora` datetime NOT NULL,
+  PRIMARY KEY (`idPessoa`,`idVacina`,`numDose`),
+  KEY `aplicacao_idvacina_fkey` (`idVacina`),
+  CONSTRAINT `aplicacao_idpessoa_fkey` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`),
+  CONSTRAINT `aplicacao_idvacina_fkey` FOREIGN KEY (`idVacina`) REFERENCES `vacina` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aplicacao`
+--
+
+LOCK TABLES `aplicacao` WRITE;
+/*!40000 ALTER TABLE `aplicacao` DISABLE KEYS */;
+INSERT INTO `aplicacao` VALUES (1,2,1,'2022-01-02 15:28:00'),(1,3,1,'2022-03-16 13:16:00'),(4,2,1,'2022-03-05 12:26:00'),(4,5,1,'2022-03-24 15:19:00'),(4,5,2,'2022-03-30 23:02:00'),(5,2,1,'2022-01-24 18:45:00'),(5,2,2,'2022-04-19 10:37:00'),(5,4,1,'2022-02-09 08:25:00'),(5,5,1,'2022-01-23 12:19:00'),(6,1,1,'2022-01-31 14:19:00'),(6,5,1,'2022-02-26 23:17:00'),(7,2,1,'2022-02-10 13:29:00'),(7,3,1,'2022-02-25 20:52:00'),(7,5,1,'2022-02-21 16:43:00'),(7,5,2,'2022-04-18 12:40:00'),(9,2,1,'2022-01-06 02:19:00'),(9,3,1,'2022-01-23 10:06:00'),(10,1,1,'2022-02-16 06:53:00'),(10,3,1,'2022-02-19 00:17:00'),(10,3,2,'2022-03-23 02:18:00'),(10,3,3,'2022-01-20 20:34:00'),(11,4,1,'2022-01-11 20:47:00'),(11,5,1,'2022-01-12 20:01:00'),(12,1,1,'2022-02-25 04:01:00'),(13,2,1,'2022-02-12 21:26:00'),(14,3,1,'2022-02-07 11:23:00'),(15,3,1,'2022-03-09 02:35:00'),(15,4,1,'2022-01-20 14:34:00'),(15,4,2,'2022-01-23 11:21:00'),(15,4,3,'2022-02-22 11:53:00'),(16,1,1,'2022-03-02 06:49:00'),(16,2,1,'2022-01-04 22:15:00'),(19,1,1,'2022-02-27 01:38:00'),(19,2,1,'2022-01-13 13:25:00'),(20,5,1,'2022-01-15 20:52:00'),(21,1,1,'2022-01-24 10:11:00'),(21,2,1,'2022-04-04 20:14:00'),(21,2,2,'2022-01-13 13:23:00'),(21,3,1,'2022-01-25 02:45:00'),(22,2,1,'2022-01-22 22:58:00'),(22,5,1,'2022-01-30 20:11:00'),(23,2,1,'2022-04-19 06:12:00'),(25,1,1,'2022-01-28 18:28:00'),(26,2,1,'2022-03-15 02:11:00'),(28,3,1,'2022-02-19 20:17:00'),(28,4,1,'2022-04-09 04:02:00'),(29,4,1,'2022-01-20 23:07:00'),(30,1,1,'2022-03-24 13:47:00'),(30,5,1,'2022-03-27 13:12:00');
+/*!40000 ALTER TABLE `aplicacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pessoa`
+--
+
+DROP TABLE IF EXISTS `pessoa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pessoa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pessoa`
+--
+
+LOCK TABLES `pessoa` WRITE;
+/*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
+INSERT INTO `pessoa` VALUES (1,'GAEL JORGE NASCIMENTO','2022-01-09'),(2,'OTÁVIO CAUÊ ELIAS GOMES','2021-12-17'),(3,'ANDREIA CAROLINA DA ROSA','2021-11-14'),(4,'JOSÉ MATEUS NOAH PEIXOTO','2021-11-22'),(5,'GABRIELLY ANTÔNIA VIEIRA','2021-12-10'),(6,'ADRIANA MELISSA DÉBORA FIGUEIREDO','2021-10-16'),(7,'PAULO LEVI LOPES','2021-10-09'),(8,'LUIZ JOSÉ DA CUNHA','2022-01-10'),(9,'OLIVIA CAROLINA JULIA CAMPOS','2021-10-17'),(10,'THEO JOAQUIM DE PAULA','2021-12-08'),(11,'LEONARDO ANTONIO FOGAÇA','2021-10-07'),(12,'MÁRCIO IAGO MOURA','2021-12-31'),(13,'MIGUEL NATHAN APARÍCIO','2021-12-09'),(14,'CARLOS NATHAN FERREIRA','2021-12-06'),(15,'IAN ANDRÉ ARAGÃO','2021-12-05'),(16,'IAN CAIO NOGUEIRA','2021-12-27'),(17,'ESTHER BRENDA RAIMUNDA BARROS','2021-11-13'),(18,'EVELYN KAMILLY MARIA OLIVEIRA','2022-01-09'),(19,'TEREZA MARIANE DA LUZ','2021-11-05'),(20,'NOAH GUILHERME DOS SANTOS','2021-12-27'),(21,'BRUNO JUAN GALVÃO','2022-01-05'),(22,'LOUISE ANDREA MARIANA DIAS','2021-12-10'),(23,'CAIO MARCOS VINICIUS CARDOSO','2021-10-29'),(24,'ISABELA LUCIANA REZENDE','2021-10-26'),(25,'MARIANE SARA TEIXEIRA','2021-12-18'),(26,'FELIPE ANTONIO THEO LIMA','2021-12-24'),(27,'ELISA AYLA NUNES','2021-11-09'),(28,'NELSON GUSTAVO MORAES','2021-11-30'),(29,'MARINA LUIZA ASSIS','2021-12-28'),(30,'RODRIGO CAUÃ MELO','2021-12-06');
+/*!40000 ALTER TABLE `pessoa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vacina`
+--
+
+DROP TABLE IF EXISTS `vacina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vacina` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `doses` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vacina`
+--
+
+LOCK TABLES `vacina` WRITE;
+/*!40000 ALTER TABLE `vacina` DISABLE KEYS */;
+INSERT INTO `vacina` VALUES (1,'BCG',1),(2,'Hepatite B',3),(3,'Tetravalente',3),(4,'VOP',4),(5,'VORH',2),(6,'Febre Amarela',2);
+/*!40000 ALTER TABLE `vacina` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-04-19  9:46:33
