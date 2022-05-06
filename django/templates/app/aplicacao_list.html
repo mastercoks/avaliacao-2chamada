@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lista de aplicações</title>
+  </head>
+  <body>
+    <h1>Lista de aplicações</h1>
+    <input type="submit" value="Criar nova aplicacao" onclick="location.href = '{% url 'app:aplicacao_create' %}'">
+    <table>
+      <tr>
+        <th>Pessoa</th>
+        <th>Vacina</th>
+        <th>Nª de Dose</th>
+        <th>Data e Hora da Aplicação</th>
+      </tr>
+      {% for aplicacao in object_list %}
+        <tr>
+          <th>{{ aplicacao.pessoa.nome }}</th>
+          <th>{{ aplicacao.vacina.nome }}</th>
+          <th>{{ aplicacao.numDose }}</th>
+          <th>{{ aplicacao.dataHora }}</th>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

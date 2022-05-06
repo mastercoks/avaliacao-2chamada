@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Deletar pessoa</title>
+  </head>
+  <body>
+    Tem certeza que deseja apagar o cliente '{{ object.nome }}'?
+    <form action="." method="post">
+      {% csrf_token %}
+      <input type="submit" value="Apagar">
+      <input type="reset" value="Cancelar" onclick="location.href = '{% url 'app:pessoa_list' %}'">
+    </form>
+  </body>
+</html>

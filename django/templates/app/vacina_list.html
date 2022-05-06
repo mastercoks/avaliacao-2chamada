@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lista de vacinas</title>
+  </head>
+  <body>
+    <h1>Lista de vacinas</h1>
+    <input type="submit" value="Criar nova vacina" onclick="location.href = '{% url 'app:vacina_create' %}'">
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Doses</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for vacina in object_list %}
+        <tr>
+          <th>{{ vacina.nome }}</th>
+          <th>{{ vacina.doses }}</th>
+          <th>
+            <a 
+              href="{% url 'app:vacina_update' pk=vacina.id %}"
+              title="Editar vacina {{ vacina.nome }}"
+            >Editar</a>
+          </th>
+          <th>
+            <a 
+              href="{% url 'app:vacina_delete' pk=vacina.id %}"
+              title="Excluir vacina {{ vacina.nome }}"
+            >Excluir</a>
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lista de pessoas</title>
+  </head>
+  <body>
+    <h1>Lista de pessoas</h1>
+    <input type="submit" value="Criar nova pessoa" onclick="location.href = '{% url 'app:pessoa_create' %}'">
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Nascimento</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for pessoa in object_list %}
+        <tr>
+          <th>{{ pessoa.nome }}</th>
+          <th>{{ pessoa.nascimento }}</th>
+          <th>
+            <a 
+              href="{% url 'app:pessoa_update' pk=pessoa.id %}"
+              title="Editar pessoa {{ pessoa.nome }}"
+            >Editar</a>
+          </th>
+          <th>
+            <a 
+              href="{% url 'app:pessoa_delete' pk=pessoa.id %}"
+              title="Excluir pessoa {{ pessoa.nome }}"
+            >Excluir</a>
+          </th>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
