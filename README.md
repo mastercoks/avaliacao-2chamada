@@ -11,3 +11,6 @@ Avaliação de 2 chamada das disciplinas de Frameworks de Persistência de Dados
 
 `cd laravel && ./vendor/bin/sail up`
 
+## Django
+
+`cd django && bash deploy.sh`
