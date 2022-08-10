@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<f:metadata>
+		<f:viewAction action="#{consulta_aplicacoes.consultar}" />
+	</f:metadata>
+	<ui:define name="titulo">Consulta de aplicação</ui:define>
+	<ui:define name="corpo">
+		<h1>Consulta de aplicação</h1>
+		<h:form id="frm">
+			<p:messages
+				showDetail="false"
+				showSummary="true"
+				autoUpdate="true"
+			/>
+			<p:dataTable
+				value="#{consulta_aplicacoes.aplicacoes}"
+				var="aplicacao"
+				border="1"
+				cellspacing="0"
+				cellpadding="2"
+				paginator="true"
+				rows="5"
+				paginatorPosition="bottom"
+			>
+				<p:column headerText="Pessoa">
+					<h:outputText value="#{aplicacao.pessoa.nome}" />
+				</p:column>
+				
+				<p:column headerText="Vacina">
+					<h:outputText value="#{aplicacao.vacina.nome}" />
+				</p:column>
+				
+				<p:column headerText="Número de dose">
+					<h:outputText value="#{aplicacao.numDose}" />
+				</p:column>
+				
+				<p:column headerText="Dada e hora de aplicação" style="text-align: center">
+					<h:outputText value="#{aplicacao.dataHora}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Bahia" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column>
+					<p:button
+						icon="ui-icon-pencil"
+						title="Editar"
+						outcome="/aplicacao/cadastro"
+					>
+						<f:param name="id" value="#{aplicacao.id}" />
+					</p:button>
+					<p:commandButton
+						icon="ui-icon-trash"
+						title="Excluir"
+						process="@this"
+						update="@form"
+						action="#{consulta_aplicacoes.excluir}"
+					>
+						<f:setPropertyActionListener
+							value="#{aplicacao}"
+							target="#{consulta_aplicacoes.aplicacaoSelecionada}"
+						/>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>		
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+>
+	<f:metadata>
+		<o:viewParam name="id" value="#{cadastro_pessoa.pessoa}" />
+		<f:viewAction action="#{cadastro_pessoa.prepararCadastro}" />
+	</f:metadata>
+	<ui:define name="titulo">Cadastro de pessoa</ui:define>
+	<ui:define name="corpo">
+		<h1>Cadastro de pessoa</h1>
+		
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Nome" />
+				<p:inputText
+					size="100"
+					value="#{cadastro_pessoa.pessoa.nome}"
+					label="Nome"
+					required="true"
+				/>
+				
+				<p:outputLabel value="Data de nascimento" for="nascimento" />
+				<p:calendar
+					id="nascimento"
+					size="12"
+					pattern="dd/MM/yyyy"
+					value="#{cadastro_pessoa.pessoa.nascimento}"
+				/>
+				
+				<p:outputLabel />
+				<p:commandButton
+					value="Salvar"
+					action="#{cadastro_pessoa.salvar}"
+					icon="ui-icon-disk"
+					update="@form"
+				/>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

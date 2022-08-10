@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+	<title>
+		<ui:insert name="titulo">Sistema Financeiro</ui:insert>
+	</title>
+	<h:outputStylesheet library="css" name="geral.css"/>
+</h:head>
+<h:body>
+	<header>
+		Atividade 2º Chamada - Programação para a Web II
+	</header>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="loading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	<h:form>
+		<p:menubar style="margin-bottom: 20px">
+			<p:submenu label="Cadastros">
+				<p:menuitem
+					value="Aplicação"					
+					action="/aplicacao/cadastro?faces-redirect=true"
+				/>
+				<p:menuitem
+					value="Pessoa"
+					action="/pessoa/cadastro?faces-redirect=true"
+				/>
+				<p:menuitem
+					value="Vacina"
+					action="/vacina/cadastro?faces-redirect=true"
+				/>
+			</p:submenu>
+			<p:submenu label="Consultas">
+				<p:menuitem
+					value="Aplicações"
+					action="/aplicacao/consulta?faces-redirect=true"
+				/>
+				<p:menuitem
+					value="Pessoas"
+					action="/pessoa/consulta?faces-redirect=true"
+				/>
+				<p:menuitem
+					value="Vacinas"
+					action="/vacina/consulta?faces-redirect=true"
+				/>
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+	
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+	
+	<footer>
+		IFBA - Matheus Coqueiro Andrade
+	</footer>
+</h:body>
+</html>

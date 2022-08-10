@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<f:metadata>
+		<f:viewAction action="#{consulta_vacinas.consultar}" />
+	</f:metadata>
+	<ui:define name="titulo">Consulta de vacina</ui:define>
+	<ui:define name="corpo">
+		<h1>Consulta de vacina</h1>
+		<h:form id="frm">
+			<p:messages
+				showDetail="false"
+				showSummary="true"
+				autoUpdate="true"
+			/>
+			<p:dataTable
+				value="#{consulta_vacinas.vacinas}"
+				var="vacina"
+				border="1"
+				cellspacing="0"
+				cellpadding="2"
+				paginator="true"
+				rows="5"
+				paginatorPosition="bottom"				
+			>
+				<p:column headerText="Nome">
+					<h:outputText value="#{vacina.nome}" />
+				</p:column>
+				<p:column headerText="Número de doses">
+					<h:outputText value="#{vacina.doses}" />
+				</p:column>
+				<p:column>
+					<p:button
+						icon="ui-icon-pencil"
+						title="Editar"
+						outcome="/vacina/cadastro"
+					>
+						<f:param name="id" value="#{vacina.id}" />
+					</p:button>
+					<p:commandButton
+						icon="ui-icon-trash"
+						title="Excluir"
+						process="@this"
+						update="@form"
+						action="#{consulta_vacinas.excluir}"
+					>
+						<f:setPropertyActionListener
+							value="#{vacina}"
+							target="#{consulta_vacinas.vacinaSelecionada}"
+						/>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>		
+		</h:form>
+	</ui:define>
+</ui:composition>

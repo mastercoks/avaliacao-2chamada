@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+>
+	<f:metadata> 
+		<o:viewParam name="id" value="#{cadastro_aplicacao.aplicacao}" />
+		<f:viewAction action="#{cadastro_aplicacao.prepararCadastro}" />
+	</f:metadata>
+	<ui:define name="titulo">Cadastro de aplicação</ui:define>
+	<ui:define name="corpo">
+		<h1>Cadastro de aplicação</h1>
+		
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Pessoa" for="pessoa" />
+				<p:selectOneMenu
+					value="#{cadastro_aplicacao.aplicacao.pessoa}"
+					id="pessoa"
+					filter="true"
+					filterMatchMode="contains"
+				>
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems
+						value="#{cadastro_aplicacao.pessoas}"
+						var="pessoa"
+						itemValue="#{pessoa}"
+						itemLabel="#{pessoa.nome}"
+					/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Vacina" for="vacina" />
+				<p:selectOneMenu
+					value="#{cadastro_aplicacao.aplicacao.vacina}"
+					id="vacina"
+					filter="true"
+					filterMatchMode="contains"
+				>
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems
+						value="#{cadastro_aplicacao.vacinas}" 
+						var="vacina"
+						itemValue="#{vacina}"
+						itemLabel="#{vacina.nome}"
+					/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Número de Doses" for="numDose"/>
+				<p:inputText
+					id="numDose"
+					size="12"
+					value="#{cadastro_aplicacao.aplicacao.numDose}"
+					label="Número de Dose"
+					required="true" 
+				>
+					<f:convertNumber
+						locale="pt_BR"
+						integerOnly="true"
+					/>
+				</p:inputText>
+				
+				<p:outputLabel value="Data e hora da aplicação" for="dataHora" />
+				<p:calendar
+					id="dataHora"
+					size="12"
+					pattern="dd/MM/yyyy HH:mm"
+					value="#{cadastro_aplicacao.aplicacao.dataHora}"
+				/>
+				
+				<p:outputLabel />
+				<p:commandButton
+					value="Salvar"
+					action="#{cadastro_aplicacao.salvar}"
+					icon="ui-icon-disk"
+					update="@form"
+				/>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
